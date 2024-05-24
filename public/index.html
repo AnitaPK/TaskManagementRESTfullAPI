@@ -51,7 +51,7 @@
         const itemIdInput = document.getElementById('itemIdInput');
     
     // Function to fetch items from the API and update the display
-    function fetchItems() {
+    function fetchAllTaskItems() {
       fetch('/api/getAll')
         .then(response => response.json())
         .then(data => {
@@ -72,8 +72,8 @@
       })
         .then(response => response.json())
         .then(() => {
-          fetchItems();
-          itemInput.value = '';
+          fetchAllTaskItems();
+          itemInput.value = itemDiscription.value = '';
         });
     }
 
@@ -125,7 +125,7 @@
 
 
     // Initial fetch of items
-    fetchItems();
+    fetchAllTaskItems();
 
 
 
