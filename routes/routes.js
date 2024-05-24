@@ -2,14 +2,20 @@ const express = require('express');
 
 const router =express.Router();
 
-const data =[ {"id":1,"taskName":"Project1","Discription":"Project1 Project1Discription"},
-{"id":2,"taskName":"Project2","Discription":"Project1 Project1Discription"},
-{"id":3,"taskName":"Project3","Discription":"Project1 Project1Discription"}
+const data =[ {"id":1,"name":"Project1","discription":"Project1 Project1Discription"},
+{"id":2,"name":"Project2","discription":"Project2 Project1Discription"},
+{"id":3,"name":"Project3","discription":"Project2 Project1Discription"}
 ];
 //add new
-router.post('/post',(req,res)=>{
-
-    // res.send('api from post API');
+router.post('/addNewTask',(req,res)=>{
+    console.log(req.body);
+       response = { 
+        "id":data.length + 1,
+        "name": req.body.name,
+       "discription":req.body.discription}
+    //    console.log(response.id);
+    data.push(response);
+    console.log(data.length);
     res.send(data);
 })  
  

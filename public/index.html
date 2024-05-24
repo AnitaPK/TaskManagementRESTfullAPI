@@ -14,7 +14,12 @@
     <form id="apiForm">
       <label for="itemInput">Item Name:</label>
       <input type="text" id="itemInput" required>
+      <label for="itemDiscription">Item Discription:</label>
+      <input type="text" id="itemDiscription" required>
       <button type="button" id="addItemButton">Add Item (POST)</button>
+
+
+
       <br><hr><br><br><hr><br>
       <input type="text" id="updatedIdInput" required>
       <input type="text" id="updatedInputItem">
@@ -36,6 +41,7 @@
     
         const apiForm = document.getElementById('apiForm');
         const itemInput = document.getElementById('itemInput');
+        const itemDiscription = document.getElementById('itemDiscription');
         const addItemButton = document.getElementById('addItemButton');
         const updatedInputId = document.getElementById('updatedIdInput');
         const updatedInputItem = document.getElementById('updatedInputItem');
@@ -50,13 +56,14 @@
         .then(response => response.json())
         .then(data => {
             console.log(data);
-          itemList.innerHTML = data.map(item => `<li>${item.taskName} (ID: ${item.id})</li>`).join('');
+          itemList.innerHTML = data.map(item => `<li>${item.name} (ID: ${item.id})</li>`).join('');
         });
     }
      // Function to add a new item to the API (POST)
      function addItem() {
-      const newItem = { name: itemInput.value };
-      fetch('/api/items', {
+      const newItem = { name: itemInput.value, discription: itemDiscription.value };
+      console.log(newItem);
+      fetch('/api/addNewTask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,11 +112,9 @@
        e.preventDefault();
      });
 
-
     addItemButton.addEventListener('click', () => {
       addItem();
     });
-
 
     updateItemButton.addEventListener('click', () => {
       updateItem();
